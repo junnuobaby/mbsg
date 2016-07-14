@@ -1,0 +1,209 @@
+/*common*/
+* {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+}
+html, body {
+    height: 100%;
+}
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    position: relative;
+}
+/*door*/
+.door {
+    position: relative;
+    min-height: 100%;
+    background: url('../img/flower_circle.png') no-repeat center center,
+    url('../img/city.png') no-repeat bottom right,
+    url('../img/logo.png') no-repeat top left;
+    background-size: auto 90%, auto 35%, auto auto;
+}
+.login_form {
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    height: 50%;
+    width: 30%;
+    background: url('../img/door_form.png') no-repeat center center fixed;
+    background-size: 28% auto;
+}
+.login_input input {
+    display: block;
+    font-size: 1.5em;
+    color: #6c3300;
+    position: fixed;
+    padding: 1em;
+}
+.first_name {
+    top: 36%;
+    left: 40%;
+}
+.second_name {
+    top: 60%;
+    left: 40%;
+}
+.login_cipher {
+    top: 48%;
+    left: 40%;
+}
+input.door_btn {
+    top: 68%;
+    left: 50%;
+    color: #a9a9a9;
+}
+input.door_btn:hover {
+    color: #6c3300;
+}
+/*index*/
+.index {
+    min-height: 100%;
+    position: relative;
+    background: url('../img/left.png') no-repeat fixed;
+    /*url('../img/stub.jpg') bottom right no-repeat fixed;*/
+    background-size: 18% 100%;
+}
+.msgs_container {
+    width: 40%;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+.msgs_container_head {
+    position: relative;
+}
+.msgs_container_head img {
+    max-width: 100%;
+}
+.msgs_container_head:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: url('../img/single_rose.png') no-repeat;
+    background-size: 100% auto;
+    height: 150%;
+    width: 25%;
+    right: 15%;
+    top: -70%;
+}
+.msgs_container_body {
+    position: relative;
+    width: 100%;
+    /*border: 1px solid red;*/
+}
+.msgs_container_body img {
+    max-width: 100%;
+}
+.msgs_container_footer {
+    position: relative;
+    width: 100%;
+}
+.msgs_container_footer:after {
+    content: '';
+    clear: both;
+    height: 0;
+    display: block;
+}
+.msgs_container_footer img {
+    max-width: 20%;
+}
+.letter {
+    position: absolute;
+    width: 60%;
+    height: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: microsoft yahei;
+    padding: 0 0.5em;
+}
+.letter_body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #4a4a4a;
+}
+.letter_date {
+    margin-right: 0.5em;
+}
+.write_letter {
+    position: fixed;
+    width: 200px;
+    bottom: 0;
+    right: 0;
+}
+a.write_btn {
+    position: absolute;
+    top: 50px;
+    left: 80px;
+    font-size: 1.5em;
+    color: #6c3300;
+    font-weight: bold;
+}
+a.write_btn:hover {
+    color: #cc5900;
+    text-decoration: none;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+}
+.write_paper {
+    position: absolute;
+    z-index: 1;
+    width: 800px;
+    background: transparent;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.write_paper .close_btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #eee;
+    font-size: 18px;
+}
+.write_paper .title_box {
+    margin-bottom: -40px;
+}
+.write_paper textarea {
+    position: absolute;
+    font-family: microsoft yahei;
+}
+.write_title_input {
+    left: 40px;
+    top: 110px;
+    width: 240px;
+    transform: rotate(-8deg);
+}
+.write_body_input {
+    left: 30px;
+    top: 250px;
+    width: 600px;
+    line-height: 1.5;
+}
+.send_letter_img {
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    z-index: 1;
+}
+button.send_btn {
+    position: absolute;
+    bottom: 20px;
+    right: 120px;
+    z-index: 10;
+    font-size: 1.5em;
+    color: #cc5900;
+    font-weight: bold;
+}
+
+
+
