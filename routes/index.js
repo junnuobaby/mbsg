@@ -33,7 +33,8 @@ router.post('/login', function(req, res) {
             req.session.user = {
                 girl: user.girl,
                 boy: user.boy,
-                token: user.token
+                token: user.token,
+                _id: user._id
             };
             req.session.save(function (err) {
                 res.redirect('/index');
@@ -43,8 +44,9 @@ router.post('/login', function(req, res) {
 });
 
 
-router.get('/index/:page', function(req, res) {
-    if (req.session.user) {
+router.get('/index', function(req, res) {
+    var user_session = req.session.user;
+    if (user_session) {
         Letter.findOne({}).sort({'date':-1}).exec(function (err, doc) {
             res.render('index', {title: "情书", letter:doc});
         });
@@ -58,8 +60,6 @@ router.post('/write', function(req, res) {
     var title = req.body.title;
     var content = req.body.content;
     var user = req.session.user;
-
-
     var letter = new Letter({
         title: title,
         content: content,
@@ -81,8 +81,57 @@ router.post('/write', function(req, res) {
 
 
 router.get('/read', function (req, res) {
-    Letter.find({}).sort({'date':-1}).exec(function (err, doc) {
+    var user_session = req.session.user;
+    Letter.find({owner: user_session._id}).sort({'date':-1}).exec(function (err, doc) {
         res.json(doc);
+    });
+});
+
+
+router.get('/letter/:letter_id', function (req, res) {
+    var letter_id = req.params.letter_id;
+    Letter.findOne({_id: letter_id}).exec(function (err, doc) {
+        res.json(doc);
+    });
+});
+
+
+router.get('/next/:letter_id', function (req, res) {
+    var letter_id = req.params.letter_id;
+    var user = req.session.user;
+    User.findOne(user).exec(function (err, doc) {
+        var letter_list = doc.letters;
+        var index = letter_list.indexOf(letter_id);
+        if (index == 0){
+            Letter.findOne({_id: letter_id}).exec(function (err, doc) {
+                res.json(doc);
+            });
+        }
+        else {
+            Letter.findOne({_id: letter_list[index-1]}).exec(function (err, doc) {
+                res.json(doc);
+            });
+        }
+    });
+});
+
+
+router.get('/previous/:letter_id', function (req, res) {
+    var letter_id = req.params.letter_id;
+    var user = req.session.user;
+    User.findOne(user).exec(function (err, doc) {
+        var letter_list = doc.letters;
+        var index = letter_list.indexOf(letter_id);
+        if (index == letter_list.length-1){
+            Letter.findOne({_id: letter_id}).exec(function (err, doc) {
+                res.json(doc);
+            });
+        }
+        else {
+            Letter.findOne({_id: letter_list[index+1]}).exec(function (err, doc) {
+                res.json(doc);
+            });
+        }
     });
 });
 
@@ -104,7 +153,6 @@ router.get('/register', function (req, res) {
         res.send('注册成功');
     });
 });
-
 
 
 router.get('/logout', function (req, res) {

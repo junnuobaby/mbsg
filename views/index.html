@@ -1,58 +1,49 @@
+<body ng-app="app" ng-controller="indexCtrl">
 <div class="index">
-    <div class="msgs_container">
+    <div class="msgs_container" >
         <div class="msgs_container_head">
             <img src="/img/house_name.png" class="center-block">
         </div>
         <div class="msgs_container_body">
             <img src="/img/index_bg.png" class="center-block">
             <div class="letter">
-
+                <p class="hidden" ng-init="letter.id='{{letter._id}}'" ng-bind="letter.id"></p>
                 <div class="letter_title">
-                    <h3 class="text-center">{{letter.title}}</h3>
+                    <h3 class="text-center" ng-init="letter.title='{{letter.title}}'" ng-bind="letter.title"></h3>
                 </div>
-                <div class="letter_body">
-                    {{letter.content}}
-                </div>
+                <div class="letter_body" ng-init="letter.content='{{letter.content}}'" ng-bind="letter.content"></div>
                 <div class="letter_date pull-right">
                     <br/>
-                    <p><small>{{letter.date}}</small></p>
+                    <p><small ng-init="letter.date='{{letter.date}}'" ng-bind="format(letter.date)"></small></p>
                 </div>
             </div>
         </div>
         <div class="msgs_container_footer">
-            <a href="#"> <img src="/img/pre.png" class="pull-left"> </a> <a href="#">
-            <img src="/img/next2.png" class="pull-right"> </a>
+            <a href="#" ng-click="previous()">
+                <img src="/img/pre.png" class="pull-left">
+            </a>
+            <a href="#" ng-click="next()">
+                <img src="/img/next2.png" class="pull-right">
+            </a>
         </div>
     </div>
     <div class="write_letter">
-        <img src="/img/stub.jpg" class="img-responsive center-block"> <a href="#" class="write_btn" id="write_btn">write</a>
+        <img src="/img/stub.jpg" class="img-responsive center-block"> <a href="#" class="write_btn" ng-click="toggle()">write</a>
     </div>
 </div>
-<div class="overlay hidden" id="overlay"></div>
-<div class="write_paper hidden" id="write_paper">
+<div class="overlay" ng-show="overlay_show"></div>
+<div class="write_paper" ng-show="write_paper_show">
     <div class="close_btn">
-        <button id="close"><span class="glyphicon glyphicon-remove"></span></button>
+        <button ng-click="toggle()"><span class="glyphicon glyphicon-remove"></span></button>
     </div>
     <img src="/img/title.png" class="img-responsive title_box" width="300px">
     <img src="/img/page.png" class="img-responsive">
     <form action="/write" method="post">
-        <textarea cols="40" rows="3" class="write_title_input center-block" name="title" placeholder="在这里输入标题哦"></textarea>
-        <textarea cols="100" rows="13" class="write_body_input" name="content" placeholder="请写下你的心意吧，我们会帮你送达到对方^_^"></textarea>
+        <textarea cols="40" rows="3" class="write_title_input center-block" name="title" placeholder="在这里输入标题哦" required></textarea>
+        <textarea cols="100" rows="13" class="write_body_input" name="content" placeholder="请写下你的心意吧，我们会帮你送达到对方^_^" required></textarea>
         <img src="/img/send.png" class="img-responsive send_letter_img" width="200px">
         <button type="submit" class="send_btn">发送</button>
     </form>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#close').on('click', function () {
-            $('#overlay').addClass('hidden');
-            $('#write_paper').addClass('hidden');
-        });
-        $('#write_btn').on('click', function () {
-            $('#overlay').removeClass('hidden');
-            $('#write_paper').removeClass('hidden');
-        });
-    });
-</script>
+</body>
 
