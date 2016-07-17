@@ -17,45 +17,60 @@ body {
 .door {
     position: relative;
     min-height: 100%;
-    background: url('../img/flower_circle.png') no-repeat center center,
-    url('../img/city.png') no-repeat bottom right,
+    background: url('../img/city.png') no-repeat bottom right,
     url('../img/logo.png') no-repeat top left;
-    background-size: auto 90%, auto 35%, auto auto;
+    background-size: auto 35%, auto auto;
+}
+.flower_circle {
+    position: absolute;
+    width: 700px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .login_form {
     position: absolute;
-    top: 25%;
-    left: 35%;
-    height: 50%;
-    width: 30%;
-    background: url('../img/door_form.png') no-repeat center center fixed;
-    background-size: 28% auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
 }
 .login_input input {
     display: block;
     font-size: 1.5em;
     color: #6c3300;
-    position: fixed;
-    padding: 1em;
+    position: absolute;
 }
 .first_name {
-    top: 36%;
-    left: 40%;
+    top: 28%;
+    left: 20%;
 }
 .second_name {
-    top: 60%;
-    left: 40%;
+    top: 73%;
+    left: 20%;
 }
 .login_cipher {
-    top: 48%;
-    left: 40%;
+    top: 50%;
+    left: 20%;
 }
 input.door_btn {
-    top: 68%;
-    left: 50%;
-    color: #a9a9a9;
+    top: 112%;
+    right: 20%;
+    color: #8b3a00;
 }
 input.door_btn:hover {
+    color: #6c3300;
+}
+a.register_btn {
+    display: block;
+    position: absolute;
+    top: 112%;
+    left: 20%;
+    color: #8b3a00;
+    font-size: 1.5em;
+}
+a.register_btn:hover {
+    text-decoration: none;
     color: #6c3300;
 }
 /*index*/
@@ -63,7 +78,6 @@ input.door_btn:hover {
     min-height: 100%;
     position: relative;
     background: url('../img/left.png') no-repeat fixed;
-    /*url('../img/stub.jpg') bottom right no-repeat fixed;*/
     background-size: 18% 100%;
 }
 .msgs_container {
@@ -92,7 +106,6 @@ input.door_btn:hover {
 .msgs_container_body {
     position: relative;
     width: 100%;
-    /*border: 1px solid red;*/
 }
 .msgs_container_body img {
     max-width: 100%;
@@ -130,21 +143,30 @@ input.door_btn:hover {
 }
 .write_letter {
     position: fixed;
-    width: 200px;
+    width: 220px;
     bottom: 0;
     right: 0;
 }
 a.write_btn {
     position: absolute;
-    top: 50px;
+    top: 48px;
     left: 80px;
     font-size: 1.5em;
     color: #6c3300;
     font-weight: bold;
 }
-a.write_btn:hover {
+a.write_btn:hover,
+a.logout_btn:hover {
     color: #cc5900;
     text-decoration: none;
+}
+a.logout_btn {
+    position: absolute;
+    top: 75px;
+    left: 82px;
+    font-size: 1.5em;
+    color: #6c3300;
+    font-weight: bold;
 }
 .overlay {
     position: fixed;
