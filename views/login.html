@@ -1,18 +1,33 @@
-<body ng-app="app">
+<body ng-controller="doorCtrl">
 <div class="door">
+    <p class="text-danger register_feedback text-center">{{error}}</p>
+    <p class="text-danger register_feedback text-center">{{success}}</p>
     <div class="flower_circle">
         <img src="/img/flower_circle.png" class="img-responsive center-block">
         <div class="login_form">
             <img src="/img/door_form.png" class="img-responsive center-block"/>
             <form class="login_input" action="/login" method="post">
-                <input type="text" value="chenin" class="first_name" name="girl">
-                <input type="password" value="eryidianer" class="login_cipher" name="token">
-                <input type="text" value="blandy" class="second_name" name="boy">
+                <input type="text" placeholder="girl" class="first_name" name="girl">
+                <input type="password" placeholder="password" class="login_cipher" name="token">
+                <input type="text" placeholder="boy" class="second_name" name="boy">
                 <input type="submit" class="door_btn" value="enter >>">
-                <a href="#" class="register_btn"><< register</a>
+                <a href="#" class="register_btn"  ng-click="toggle()"><< register</a>
             </form>
         </div>
     </div>
+</div>
+<div class="overlay" ng-show="overlay_show"></div>
+<div class="register_box" ng-show="overlay_show">
+    <div class="close_btn">
+        <button ng-click="toggle()"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+    <img src="/img/register.png" class="center-block img-responsive"/>
+    <form class="register_form" action="/register" method="post">
+        <input type="text" placeholder="girl" class="register_girl" name="girl" required>
+        <input type="password" placeholder="pwd" class="register_cipher" name="token" required>
+        <input type="text" placeholder="boy" class="register_boy" name="boy" required>
+        <input type="submit" class="register_btn" value="">
+    </form>
 </div>
 </body>
 

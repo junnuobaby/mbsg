@@ -27,7 +27,7 @@ router.post('/login', function(req, res) {
             return res.json({err:err});
         }
         if(!user) {
-            return res.json({err:'用户不存在'});
+            res.render('login', {error: "用户不存在"});
         }
         else {
             req.session.user = {
@@ -47,7 +47,7 @@ router.post('/login', function(req, res) {
 router.get('/index', function(req, res) {
     var user_session = req.session.user;
     if (user_session) {
-        Letter.findOne({}).sort({'date':-1}).exec(function (err, doc) {
+        Letter.findOne({owner:user_session._id}).sort({'date':-1}).exec(function (err, doc) {
             res.render('index', {title: "情书", letter:doc});
         });
     }else {
@@ -136,24 +136,33 @@ router.get('/previous/:letter_id', function (req, res) {
 });
 
 
-router.get('/register', function (req, res) {
-    var girl = 'chenin';
-    var boy = 'blandy';
-    var token = 'eryidianer';
+router.post('/register', function (req, res) {
+    var girl = req.body.girl;
+    var boy = req.body.boy;
+    var token = req.body.token;
 
-    var user = new User({
+    var register_form = {
         girl: girl,
         boy: boy,
         token: token
-    });
-    user.save(function (err) {
-        if(err) {
-            console.log(err);
+    };
+
+    User.findOne(register_form, function (err, user) {
+        if(user) {
+            console.log("注册失败，用户已经存在，请重新填写");
+            res.render('login', {error: "注册失败，用户已经存在，请重新填写"});
+        }else {
+            var new_user = new User(register_form);
+            new_user.save(function (err) {
+                if(err) {
+                    console.log(err);
+                }
+                console.log("注册成功，请登录");
+                res.render('login', {success: "注册成功，请登录"});
+            });
         }
-        res.send('注册成功');
     });
 });
-
 
 router.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
@@ -161,6 +170,5 @@ router.get('/logout', function (req, res) {
         res.redirect('/');
     });
 });
-
 
 module.exports = router;

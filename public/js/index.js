@@ -43,3 +43,52 @@ app.controller('indexCtrl', function ($scope, $http) {
             + ':' + date.getSeconds();
     };
 });
+
+
+app.controller('doorCtrl', function ($scope) {
+    $scope.overlay_show = false;
+    $scope.toggle = function () {
+        $scope.overlay_show = !$scope.overlay_show;
+    };
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
